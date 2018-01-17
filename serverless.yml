@@ -1,0 +1,52 @@
+service: aws-lambda-go-api-example
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: eu-west-1
+  stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:PutItem
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.dynamoDb.dataTable}*"
+  environment:
+    DYNAMODB_DATA_TABLE: ${self:custom.dynamoDb.dataTable}
+
+custom:
+  dynamoDb:
+    dataTable: ${self:service}-${self:provider.stage}-data
+
+package:
+  artifact: build/package.zip
+
+functions:
+  create:
+    handler: create
+    events:
+      - http:
+          path: /
+          method: post
+  list:
+    handler: list
+    events:
+      - http:
+          path: /
+          method: get
+
+resources:
+  Resources:
+    DataTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: Id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: Id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.dynamoDb.dataTable}
