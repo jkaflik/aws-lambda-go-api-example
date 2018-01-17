@@ -8,3 +8,4 @@ jspm_packages
 /build
 !/build/scripts
 /.idea
+/vendor
