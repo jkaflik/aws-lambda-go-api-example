@@ -9,8 +9,8 @@
     "lambda/messages",
     "lambdacontext"
   ]
-  revision = "28a6e9fa1fc02d45d9a8c0a8d22c7d5c3580aa03"
-  version = "v1.0.0"
+  revision = "6e2e37798efbb1dfd8e9c6681702e683a6046517"
+  version = "v1.0.1"
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
@@ -20,20 +20,31 @@
     "aws/awsutil",
     "aws/client",
     "aws/client/metadata",
+    "aws/corehandlers",
     "aws/credentials",
+    "aws/credentials/ec2rolecreds",
+    "aws/credentials/endpointcreds",
+    "aws/credentials/stscreds",
+    "aws/defaults",
+    "aws/ec2metadata",
     "aws/endpoints",
     "aws/request",
+    "aws/session",
     "aws/signer/v4",
     "internal/shareddefaults",
     "private/protocol",
     "private/protocol/json/jsonutil",
     "private/protocol/jsonrpc",
+    "private/protocol/query",
+    "private/protocol/query/queryutil",
     "private/protocol/rest",
+    "private/protocol/xml/xmlutil",
     "service/dynamodb",
-    "service/dynamodb/dynamodbattribute"
+    "service/dynamodb/dynamodbattribute",
+    "service/sts"
   ]
-  revision = "fe3adbda9bc845e750e3e5767c0a14dff202b2cc"
-  version = "v1.12.62"
+  revision = "b0e76431638de15ec1e6be51b6f745e1f2134fde"
+  version = "v1.12.63"
 
 [[projects]]
   name = "github.com/go-ini/ini"
@@ -55,6 +66,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b42464a87ea7dbd1060b21c695560aa7608c61eef5173db572e35f5ef4fea8ad"
+  inputs-digest = "8269bfc59d8dc3cc365e7b31f3d081ccd68b5ce562420e10cf999869cb2975ad"
   solver-name = "gps-cdcl"
   solver-version = 1
