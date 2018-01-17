@@ -12,11 +12,12 @@ deps:
 
 handlers:
 	cd ${BUILD_DIR}; \
-	sh scripts/handlers.sh ; \
-	cd - >/dev/null
+	rm -f handler/* ; \
+	sh scripts/handlers.sh
 
 package:
 	cd ${BUILD_DIR}; \
+	rm -f package.zip ;\
 	cd handler ; \
     zip -r ../package.zip *
 
@@ -27,17 +28,7 @@ build:
 	cd ${BUILD_DIR}; \
 	go build ${LDFLAGS} -o ${BINARY} cmd/main.go
 
-vet:
-	-cd ${BUILD_DIR}; \
-	godep go vet ./... > ${VET_REPORT} 2>&1 ; \
-	cd - >/dev/null
-
-fmt:
-	cd ${BUILD_DIR}; \
-	go fmt $$(go list ./... | grep -v /vendor/) ; \
-	cd - >/dev/null
-
 clean:
-	-rm -f ${BUILD_DIR}/*
+	-rm -rf ${BUILD_DIR}/handler ${BUILD_DIR}/package.zip
 
 .PHONY: deps handlers package build clean
